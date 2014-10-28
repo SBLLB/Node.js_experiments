@@ -4,13 +4,15 @@ var http = require("http");
 var url = require("url");
 
 
-function start(route) {
+function start(route, handle) {
 	function onRequest(request, response) {
 	  console.log("Request received.");
-	  var pathname = url.parse(request.url).pathname;
+	  var pathname = url.parse(request.url).pathname; 
+	  // parse cuts up the url...
 	  console.log("Request for " + pathname + " recieved");
 
-	  route(pathname)
+	  route(handle, pathname)
+	  // Dont understand line 14
 
 	  response.writeHead(200, {"Content-Type": "text/plain"});
 	  response.write("Hello World");
@@ -22,6 +24,20 @@ function start(route) {
 };
 
 exports.start = start; 
+
+
+ //  switch(path) {
+	//   	case '/':
+	// 	  response.writeHead(200, {"Content-Type": "text/plain"});
+	// 	  response.write("Hello World");
+	// 	  	break;
+	// 	default:
+	// 	response.writeHead(404)
+	// 	response.write("Nothing to see here")
+	// 	}
+	// 	response.end();
+
+	// };
 
 // console.log("Server has started.");
 
